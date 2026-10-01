@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MistVale Tea Co. — Premium Hand-Picked Teas</title>
+
+    <!-- Modern Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Oswald:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
+    <style>
+        :root {
+            --primary: #4a2c40;
+            --primary-hover: #36202f;
+            --accent: #d4a373;
+            --accent-bright: #e76f51;
+            --bg-light: #fefae0;
+            --text-dark: #2b2d42;
+            --text-muted: #6c757d;
+            --border-color: #e9ecef;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+            --radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        *:focus-visible {
+            outline: 2px solid var(--accent-bright) !important;
+            outline-offset: 2px;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            font-size: 15px;
+            color: var(--text-dark);
+            background-color: #fafafa;
+            line-height: 1.6;
+        }
+
+        h1,
+        h2,
+        h3,
+        .font-heading {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .font-nav {
+            font-family: 'Oswald', sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        .wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Announcement Bar */
+        .announce {
+            background: var(--primary);
+            color: #fff;
+            font-family: 'Oswald', sans-serif;
+            padding: 8px 0;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        /* Header & Navigation */
+        .header {
+            background: #fff;
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 40;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header .wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .brand-logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav {
+            display: flex;
+            gap: 24px;
+        }
+
+        .nav a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .nav a:hover {
+            color: var(--accent-bright);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .search-box {
+            position: relative;
+            width: 220px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 8px 16px 8px 36px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+
+        .search-box input:focus {
+            border-color: var(--primary);
+            width: 260px;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .cart-icon {
+            color: var(--primary);
+            font-size: 20px;
+            cursor: pointer;
+            position: relative;
+            padding: 6px;
+        }
+
+        #cart-count {
+            background: var(--accent-bright);
+            color: #fff;
+            border-radius: 50%;
+            font-size: 11px;
+            font-weight: bold;
+            padding: 2px 6px;
+            position: absolute;
+            top: -2px;
+            right: -4px;
+        }
+
+        /* Hero Banner */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=80&w=1600&auto=format&fit=crop') center/cover;
+            min-height: 480px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+        }
+
+        .hero-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 52px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .shark-badge {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            letter-spacing: 1px;
+            margin-bottom: 24px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary);
+            color: #fff;
+            padding: 10px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Oswald', sans-serif;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: none;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-accent {
+            background: var(--accent-bright);
+        }
+
+        .btn-accent:hover {
+            background: #d65a3c;
+        }
+
+        /* Flash Sale Banner */
+        .sale-bar {
+            background: #fff3cd;
+            border-bottom: 1px solid #ffeeba;
+            color: #856404;
+            padding: 10px 0;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* Product Section */
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin: 40px 0 20px;
+            color: var(--primary);
+        }
+
+        .filters-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+
+        .filter-chips {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .filter {
+            padding: 6px 18px;
+            background: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .filter.active,
+        .filter:hover {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+        }
+
+        select.sort-select {
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            background: #fff;
+            font-size: 13px;
+        }
+
+        /* Product Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            padding: 16px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-img-wrap {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            padding-top: 100%;
+            background: #f8f9fa;
+        }
+
+        .card img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .card:hover img {
+            transform: scale(1.05);
+        }
+
+        .card h5 {
+            font-size: 16px;
+            margin: 12px 0 4px;
+            color: var(--text-dark);
+        }
+
+        .card .stars {
+            color: #f39c12;
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+
+        .card .desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            flex-grow: 1;
+            margin-bottom: 12px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: auto;
+        }
+
+        .card .price {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .heart {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.3);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            z-index: 2;
+        }
+
+        .heart.liked {
+            color: #e74c3c;
+            background: #fff;
+        }
+
+        .badge-oos {
+            background: #343a40;
+            color: #fff;
+            font-size: 10px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            position: absolute;
+            top: 24px;
+            left: 24px;
+            z-index: 2;
+        }
+
+        /* Cart Drawer */
+        #cart-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 99;
+        }
+
+        #cart {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 380px;
+            height: 100%;
+            background: #fff;
+            box-shadow: var(--shadow-md);
+            z-index: 100;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #cart.open {
+            right: 0;
+        }
+
+        .cart-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-body {
+            padding: 20px;
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .cart-footer {
+            padding: 20px;
+            border-top: 1px solid var(--border-color);
+            background: #f8f9fa;
+        }
+
+        .cart-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .qty-ctrl {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+        }
+
+        .qty-btn {
+            width: 24px;
+            height: 24px;
+            border: 1px solid var(--border-color);
+            background: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .ship-bar {
+            background: #e9ecef;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 8px 0 16px;
+        }
+
+        .ship-fill {
+            background: #2ecc71;
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        /* Quickview Modal */
+        #quickview-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 90;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-box {
+            background: #fff;
+            border-radius: var(--radius);
+            width: 90%;
+            max-width: 600px;
+            padding: 24px;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            font-size: 20px;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a1a;
+            color: #a0a0a0;
+            padding: 50px 0 20px;
+            margin-top: 60px;
+            font-size: 13px;
+        }
+
+        .footer h3 {
+            color: #fff;
+            margin-bottom: 12px;
+        }
+
+        .legal {
+            font-size: 11px;
+            color: #666;
+            margin-top: 12px;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .header .wrapper {
+                flex-wrap: wrap;
+            }
+
+            .nav {
+                display: none;
+            }
+
+            .search-box {
+                width: 100%;
+                order: 3;
+            }
+
+            #cart {
+                width: 100%;
+                right: -100%;
+            }
+
+            .hero-title {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="announce">Free Shipping on Orders Above ₹499 | Use Code <strong>WELCOME10</strong> for 10% Off</div>
+
+    <header class="header">
+        <div class="wrapper">
+            <a href="#" class="brand-logo font-heading">MistVale</a>
+            <nav class="nav font-nav">
+                <a href="#">HOME</a>
+                <a href="#shop">SHOP</a>
+                <a href="#about">ABOUT</a>
+                <a href="#contact">CONTACT</a>
+            </nav>
+            <div class="header-actions">
+                <div class="search-box">
+                    <i class="fa fa-search"></i>
+                    <input id="search" placeholder="Search teas..." aria-label="Search teas">
+                </div>
+                <div class="cart-icon" onclick="openCart()" aria-label="View shopping cart">
+                    <i class="fa fa-shopping-bag"></i>
+                    <span id="cart-count">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="wrapper hero-content">
+            <span class="shark-badge"><i class="fa fa-star"></i> AS SEEN ON SHARK TANK INDIA</span>
+            <h1 class="hero-title">Hand-Picked Artisanal Teas</h1>
+            <p>Sourced directly from the finest high-altitude estates of Darjeeling, Assam, and the Nilgiris.</p>
+            <a href="#shop" class="btn btn-accent">Explore Catalog</a>
+        </div>
+    </section>
+
+    <div class="sale-bar">
+        <i class="fa fa-clock"></i> Diwali Special Sale Ends In: <span id="countdown">Loading...</span>
+    </div>
+
+    <main class="wrapper" id="shop">
+        <h2 class="section-title">Our Collections</h2>
+
+        <div class="filters-wrapper">
+            <div class="filter-chips">
+                <button class="filter active" onclick="filterProducts('all', this)">All Teas</button>
+                <button class="filter" onclick="filterProducts('Black', this)">Black Tea</button>
+                <button class="filter" onclick="filterProducts('Green', this)">Green Tea</button>
+                <button class="filter" onclick="filterProducts('Herbal', this)">Herbal</button>
+                <button class="filter" onclick="filterProducts('Gifts', this)">Gift Boxes</button>
+            </div>
+
+            <select id="sort" class="sort-select" onchange="sortProducts()" aria-label="Sort products">
+                <option value="default">Sort By: Featured</option>
+                <option value="low">Price: Low to High</option>
+                <option value="high">Price: High to Low</option>
+                <option value="name">Name: A to Z</option>
+            </select>
+        </div>
+
+        <div class="grid" id="grid"></div>
+    </main>
+
+    <!-- Cart Drawer -->
+    <div id="cart-overlay" onclick="closeCart()"></div>
+    <aside id="cart" aria-label="Shopping Cart">
+        <div class="cart-header">
+            <h3>Your Shopping Cart</h3>
+            <span onclick="closeCart()" style="cursor:pointer; font-size: 20px;">&times;</span>
+        </div>
+        <div class="cart-body">
+            <div id="ship-msg" style="font-size: 13px; font-weight: bold;"></div>
+            <div class="ship-bar">
+                <div class="ship-fill" id="ship-fill"></div>
+            </div>
+            <div id="cart-items"></div>
+        </div>
+        <div class="cart-footer">
+            <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+                <input id="coupon" placeholder="Coupon Code"
+                    style="flex:1; padding: 8px; border: 1px solid var(--border-color); border-radius: 4px;">
+                <button class="btn" onclick="applyCoupon()">Apply</button>
+            </div>
+            <div id="totals" style="margin-bottom: 16px; font-size: 14px; line-height: 1.8;"></div>
+            <button class="btn btn-accent" style="width: 100%;" onclick="submitCheckout()">Proceed to Checkout</button>
+        </div>
+    </aside>
+
+    <!-- Quick View Modal -->
+    <div id="quickview-modal">
+        <div class="modal-box">
+            <span class="modal-close" onclick="closeQuickView()">&times;</span>
+            <div id="qv-body"></div>
+        </div>
+    </div>
+
+    <form id="checkout-form" action="https://mistvale.example/cart/checkout" method="POST" style="display:none">
+        <input type="hidden" name="items" id="checkout-items">
+        <input type="hidden" name="coupon" id="checkout-coupon">
+    </form>
+
+    <footer class="footer">
+        <div class="wrapper">
+            <h3>MistVale Tea Co.</h3>
+            <p>14 Hill Cart Road, Siliguri, West Bengal 734001 &middot; hello@mistvale.example</p>
+            <p class="legal">All prices are inclusive of GST. Returns are accepted within 7 days of delivery on unopened
+                packs only; opened tea cannot be returned for hygiene reasons. Tea colour and flavour may vary slightly
+                between harvests.</p>
+            <p class="legal">&copy; 2026 MistVale Tea Co. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const PRODUCTS = [
+            { id: 101, name: "Assam Breakfast Black Tea", category: "Black", price: 349, stock: 40, image: "https://images.unsplash.com/photo-1597481499750-3e6b22637e12?q=80&w=800&auto=format&fit=crop", desc: "Strong, malty CTC tea from Upper Assam estates. Perfect with milk and a little sugar in the morning." },
+            { id: 102, name: "Darjeeling First Flush", category: "Black", price: 1299, stock: 12, image: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?q=80&w=800&auto=format&fit=crop", desc: "Delicate, floral spring harvest leaves with a muscatel note. Best without milk.", rating: 4.8, reviews: 128 },
+            { id: 103, name: "Kashmiri Kahwa", category: "Green", price: 549, stock: 25, image: "https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=80&w=800&auto=format&fit=crop", desc: "Green tea with saffron, cardamom, cinnamon and almond flakes." },
+            { id: 104, name: "Masala Chai Blend", category: "Black", price: 399, stock: 60, image: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?q=80&w=800&auto=format&fit=crop", desc: "Bold Assam leaves with ginger, cardamom, clove and black pepper. Our bestseller.", rating: 4.7, reviews: 342 },
+            { id: 105, name: "Nilgiri Green Tea", category: "Green", price: 449, stock: 30, image: "https://images.unsplash.com/photo-1627435601361-ec25f5b1d0e5?q=80&w=800&auto=format&fit=crop", desc: "Smooth, grassy green tea from the Blue Mountains of the south." },
+            { id: 106, name: "Chamomile & Tulsi", category: "Herbal", price: 499, stock: 18, image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?q=80&w=800&auto=format&fit=crop", desc: "Caffeine-free calming blend of chamomile flowers and holy basil." },
+            { id: 107, name: "Hibiscus Rose Infusion", category: "Herbal", price: 599, stock: 0, image: "https://images.unsplash.com/photo-1558160074-4d7d8bdf4256?q=80&w=800&auto=format&fit=crop", desc: "Tangy hibiscus with rose petals. Lovely iced." },
+            { id: 108, name: "Tea Lover's Sampler Gift Box", category: "Gifts", price: 1899, stock: 9, image: "https://images.unsplash.com/photo-1594631252845-29fc4cc8cde9?q=80&w=800&auto=format&fit=crop", desc: "Six of our favourite teas in a wooden gift box with a brewing guide." }
+        ];
+
+        const API = {
+            search: function (query) {
+                const q = String(query).trim().toLowerCase();
+                return new Promise(function (resolve) {
+                    setTimeout(function () {
+                        resolve(PRODUCTS.filter(function (p) {
+                            return p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q);
+                        }).map(function (p) { return p.id; }));
+                    }, 150);
+                });
+            }
+        };
+
+        let cart = JSON.parse(localStorage.getItem('mv_cart')) || [];
+        let discount = 0;
+        let appliedCouponCode = '';
+        let shown = [...PRODUCTS];
+
+        function renderProducts(list) {
+            let html = '';
+            list.forEach(p => {
+                html += `
+      <div class="card">
+        <i class="fa-regular fa-heart heart" onclick="toggleWish(this)"></i>
+        <div class="card-img-wrap">
+          <img src="${p.image}" alt="${p.name}" loading="lazy" onclick="openQuickView(${p.id})">
+        </div>
+        ${p.stock === 0 ? '<span class="badge-oos">SOLD OUT</span>' : ''}
+        <h5>${p.name}</h5>
+        <div class="stars">${p.rating ? '★'.repeat(Math.round(p.rating)) + ' (' + p.reviews + ')' : '☆☆☆☆☆ (0)'}</div>
+        <div class="desc">${p.desc}</div>
+        <div class="card-footer">
+          <div class="price">₹${p.price.toLocaleString('en-IN')}</div>
+          ${p.stock > 0 ? `<button class="btn" onclick="addToCart(${p.id})">Add</button>` : ''}
+        </div>
+      </div>
+    `;
+            });
+            document.getElementById('grid').innerHTML = html || '<p style="grid-column: 1/-1; text-align: center; padding: 40px;">No teas match your criteria.</p>';
+        }
+
+        function filterProducts(cat, el) {
+            $('.filter').removeClass('active'); $(el).addClass('active');
+            shown = cat === 'all' ? [...PRODUCTS] : PRODUCTS.filter(p => p.category.toLowerCase() === cat.toLowerCase());
+            renderProducts(shown);
+        }
+
+        function sortProducts() {
+            const v = document.getElementById('sort').value;
+            if (v === 'low') shown.sort((a, b) => a.price - b.price);
+            if (v === 'high') shown.sort((a, b) => b.price - a.price);
+            if (v === 'name') shown.sort((a, b) => a.name.localeCompare(b.name));
+            renderProducts(shown);
+        }
+
+        document.getElementById('search').addEventListener('input', function () {
+            API.search(this.value).then(ids => {
+                shown = PRODUCTS.filter(p => ids.includes(p.id));
+                renderProducts(shown);
+            });
+        });
+
+        function toggleWish(el) {
+            $(el).toggleClass('liked fa-solid fa-regular');
+        }
+
+        function openQuickView(id) {
+            const p = PRODUCTS.find(x => x.id === id);
+            if (!p) return;
+            const html = `
+    <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+      <img src="${p.image}" alt="${p.name}" style="width: 200px; height: 200px; object-fit: cover; border-radius: 8px;">
+      <div style="flex: 1; min-width: 200px;">
+        <h2>${p.name}</h2>
+        <p style="color: var(--text-muted); margin: 8px 0;">${p.desc}</p>
+        <p style="font-size: 20px; font-weight: bold; color: var(--primary); margin-bottom: 16px;">₹${p.price}</p>
+        ${p.stock > 0 ? `<button class="btn btn-accent" onclick="addToCart(${p.id}); closeQuickView();">Add to Cart</button>` : '<span class="badge-oos">Out of Stock</span>'}
+      </div>
+    </div>
+  `;
+            document.getElementById('qv-body').innerHTML = html;
+            document.getElementById('quickview-modal').style.display = 'flex';
+        }
+
+        function closeQuickView() {
+            document.getElementById('quickview-modal').style.display = 'none';
+        }
+
+        function addToCart(id) {
+            const p = PRODUCTS.find(x => x.id === id);
+            const existing = cart.find(c => c.id === id);
+            if (existing) {
+                existing.qty++;
+            } else {
+                cart.push({ id: p.id, name: p.name, price: p.price, qty: 1 });
+            }
+            saveCart();
+            updateCount();
+            openCart();
+        }
+
+        function saveCart() {
+            localStorage.setItem('mv_cart', JSON.stringify(cart));
+        }
+
+        function updateCount() {
+            const totalItems = cart.reduce((acc, item) => acc + item.qty, 0);
+            document.getElementById('cart-count').innerText = totalItems;
+        }
+
+        function openCart() {
+            renderCart();
+            document.getElementById('cart').classList.add('open');
+            document.getElementById('cart-overlay').style.display = 'block';
+        }
+
+        function closeCart() {
+            document.getElementById('cart').classList.remove('open');
+            document.getElementById('cart-overlay').style.display = 'none';
+        }
+
+        function subtotal() {
+            return cart.reduce((s, c) => s + (c.price * c.qty), 0);
+        }
+
+        function renderCart() {
+            const itemsContainer = document.getElementById('cart-items');
+            if (cart.length === 0) {
+                itemsContainer.innerHTML = '<p style="text-align:center; padding: 20px; color: var(--text-muted);">Your cart is empty.</p>';
+            } else {
+                let html = '';
+                cart.forEach((c, i) => {
+                    html += `
+        <div class="cart-line">
+          <div>
+            <strong>${c.name}</strong>
+            <div>₹${c.price}</div>
+            <div class="qty-ctrl">
+              <button class="qty-btn" onclick="updateQty(${i}, ${c.qty - 1})">-</button>
+              <span>${c.qty}</span>
+              <button class="qty-btn" onclick="updateQty(${i}, ${c.qty + 1})">+</button>
+            </div>
+          </div>
+          <div>
+            <a href="#" onclick="removeItem(${i}); return false;" style="color: red; font-size: 12px;">Remove</a>
+          </div>
+        </div>
+      `;
+                });
+                itemsContainer.innerHTML = html;
+            }
+
+            const sub = subtotal();
+            const freeShipThreshold = 499;
+            const shipping = (sub >= freeShipThreshold || sub === 0) ? 0 : 49;
+
+            if (sub >= freeShipThreshold) {
+                document.getElementById('ship-msg').innerText = '🎉 You qualify for FREE Shipping!';
+                document.getElementById('ship-fill').style.width = '100%';
+            } else {
+                const remaining = freeShipThreshold - sub;
+                document.getElementById('ship-msg').innerText = `Add ₹${remaining} more for FREE shipping!`;
+                document.getElementById('ship-fill').style.width = `${(sub / freeShipThreshold) * 100}%`;
+            }
+
+            const total = sub + shipping - discount;
+            document.getElementById('totals').innerHTML = `
+    Subtotal: ₹${sub}<br>
+    Shipping: ₹${shipping}<br>
+    Discount: ₹${discount}<br>
+    <strong>Total: ₹${Math.max(0, total)}</strong>
+  `;
+        }
+
+        function updateQty(index, newQty) {
+            if (newQty <= 0) {
+                removeItem(index);
+            } else {
+                cart[index].qty = parseInt(newQty, 10);
+                saveCart();
+                renderCart();
+                updateCount();
+            }
+        }
+
+        function removeItem(index) {
+            cart.splice(index, 1);
+            saveCart();
+            renderCart();
+            updateCount();
+        }
+
+        function applyCoupon() {
+            const code = document.getElementById('coupon').value.trim().toUpperCase();
+            if (code === 'WELCOME10') {
+                appliedCouponCode = code;
+                discount = Math.round(subtotal() * 0.1);
+                alert('Coupon WELCOME10 applied! 10% discount added.');
+            } else {
+                alert('Invalid coupon code');
+            }
+            renderCart();
+        }
+
+        function submitCheckout() {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            document.getElementById('checkout-items').value = JSON.stringify(cart);
+            document.getElementById('checkout-coupon').value = appliedCouponCode;
+            document.getElementById('checkout-form').submit();
+        }
+
+        function countdown() {
+            const end = new Date('2026-11-01T00:00:00').getTime();
+            setInterval(() => {
+                const diff = end - new Date().getTime();
+                if (diff <= 0) return;
+                const d = Math.floor(diff / 86400000);
+                const h = Math.floor((diff % 86400000) / 3600000);
+                const m = Math.floor((diff % 3600000) / 60000);
+                const s = Math.floor((diff % 60000) / 1000);
+                document.getElementById('countdown').innerText = `${d}d ${h}h ${m}m ${s}s`;
+            }, 1000);
+        }
+
+        renderProducts(PRODUCTS);
+        updateCount();
+        countdown();
+    </script>
+</body>
+
+</html>
